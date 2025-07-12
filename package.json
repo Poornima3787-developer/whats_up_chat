@@ -1,0 +1,25 @@
+{
+  "name": "whatsupchat",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poornima3787-developer/whats_up_chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Poornima3787-developer/whats_up_chat/issues"
+  },
+  "homepage": "https://github.com/Poornima3787-developer/whats_up_chat#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2",
+    "sequelize": "^6.37.7"
+  }
+}
