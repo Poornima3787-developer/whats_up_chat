@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-  <form onsubmit="handlesubmitform(event)">
-  Name:<input type="text">Name:
-  Email:<input type="email">
-  Phone_No:<input type="tel">
-  <button type="submit">Sign up</button>
+  <h2>Sign Up</h2>
+  <form onsubmit="signupform(event)">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phoneNumber" placeholder="Phone-Number" required>
+      <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Sign up</button>
   </form>
 </body>
+<script src="/public/signup.js"></script>
 </html>
