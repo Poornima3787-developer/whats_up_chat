@@ -46,6 +46,7 @@ async function selectUser(userId, userName) {
         selectedUserId = userId;
         document.getElementById('chatHeader').textContent = `Chatting with ${userName}`;
         await loadMessages(userId);
+        startPollingMessages();
     } catch (error) {
         console.error('Error selecting user:', error);
     }
@@ -74,4 +75,17 @@ async function sendMessage(content) {
         console.error('Error sending message:', error);
         alert('Error sending message.');
     }
+}
+
+let pollingInterval = null;
+
+async function startPollingMessages() {
+    if (pollingInterval) {
+        clearInterval(pollingInterval);
+    }
+    pollingInterval = setInterval(() => {
+        if (selectedUserId) {
+            loadMessages(selectedUserId);
+        }
+    }, 1000); // Fetch every 1 second
 }
