@@ -6,13 +6,23 @@
     <title>Chat Window</title>
   </head>
   <body>
-    <h3>Users</h3>
-    <ul id="users"></ul>
-    <h3>Chat</h3>
-    <form onsubmit="chatForm(event)">
-      <input type="text" name="messageInput" placeholder="Type your message..." required/>
-      <button type="submit">Send</button>
-    </form>
+    <div id="container">
+        <!-- User List Panel -->
+        <div id="userListContainer">
+            <h3>Users</h3>
+            <ul id="userList"></ul>
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chatContainer">
+            <div id="chatHeader">Select a user to start chatting</div>
+            <div id="chatMessages"></div>
+            <form id="chatForm">
+                <input type="text" id="messageInput" name="messageInput" placeholder="Type your message..." required />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/public/chat.js"></script>
   </body>

@@ -4,6 +4,7 @@ const app=express();
 const cors=require('cors');
 const sequelize=require('./utils/db-connection');
 const userRouter=require('./router/userRouter');
+const messageRouter=require('./router/messageRouter');
 
 app.use(express.json());
 app.use(cors({
@@ -13,6 +14,7 @@ app.use(cors({
 }));
 
 app.use('/user',userRouter);
+app.use('/message',messageRouter);
 
 const PORT=process.env.port;
 sequelize.sync().then(()=>{
