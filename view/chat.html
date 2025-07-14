@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chat Window</title>
+  </head>
+  <body>
+    <h3>Users</h3>
+    <ul id="users"></ul>
+    <h3>Chat</h3>
+    <form onsubmit="chatForm(event)">
+      <input type="text" name="messageInput" placeholder="Type your message..." required/>
+      <button type="submit">Send</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/public/chat.js"></script>
+  </body>
+</html>
