@@ -14,7 +14,7 @@ async function loginForm(event){
     if(response.status===200){
       alert('Login successful!');
       localStorage.setItem('token',response.data.token);
-      window.location.href = 'dashboard.html';
+      window.location.href = 'chat.html';
     }
   } catch (error) {
     console.error(error);

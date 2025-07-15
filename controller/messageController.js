@@ -31,6 +31,10 @@ exports.getMessages=async (req,res)=>{
     },
     order: [['createdAt', 'ASC']]
     })
+    res.status(200).json({
+      message: 'Messages fetched successfully',
+      data: messages
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt=require('jsonwebtoken');
 const bycrpt=require('bcrypt');
 const User=require('../models/user');
+const {Op}=require('sequelize');
 
 const generateAccessToken=(id,name)=>{
   return jwt.sign({userId:id,name:name},process.env.JWT_SECRET,{ expiresIn: '12h' });

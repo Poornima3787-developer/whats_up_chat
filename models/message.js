@@ -2,11 +2,6 @@ const {Sequelize,DataTypes}=require('sequelize');
 const sequelize = require('../utils/db-connection');
 
 const Message=sequelize.define('Message',{
-  id:{
-    type:DataTypes.INTEGER,
-    autoIncrement:true,
-    unique:true,
-  },
   content:{
     type:DataTypes.TEXT,
     allowNull:false
@@ -21,4 +16,4 @@ const Message=sequelize.define('Message',{
   }
 });
 
-moduls.exports=Message;
+module.exports=Message;
