@@ -63,16 +63,40 @@ async function selectUser(userId, userName) {
 }
 
 async function loadMessages(receiverId) {
-    try {
-        const response = await axios.get(`${BASE_URL}/message/${receiverId}`, { headers: { Authorization: token } });
+       
         const chatMessages = document.getElementById('chatMessages');
         chatMessages.innerHTML = '';
-        response.data.data.forEach(msg => {
+
+        const loaclKey=`chat_${receiverId}`;
+        const localMessages=JSON.parse(localStorage.getItem(loaclKey))||[];
+
+        localMessages.forEach(msg => {
             const div = document.createElement('div');
             const sender = (msg.senderId === userId) ? 'You' : selectedUserName;
             div.textContent = `${sender}: ${msg.content}`;
             chatMessages.appendChild(div);
         });
+      let lastMessageId = 0;
+if (localMessages.length && localMessages[localMessages.length - 1].id) {
+    lastMessageId = localMessages[localMessages.length - 1].id;
+}
+      
+      try{
+
+         const response = await axios.get(`${BASE_URL}/message/${receiverId}?after=${lastMessageId}`, { headers: { Authorization: token } });
+        const newMessages=response.data.data;
+
+        if(newMessages.length>0){
+            const allMessages=[...localMessages,...newMessages].slice(-10);
+            localStorage.setItem(loaclKey,JSON.stringify(allMessages));
+
+            newMessages.forEach(msg => {
+                const div = document.createElement('div');
+                const sender = (msg.senderId === userId) ? 'You' : selectedUserName;
+                div.textContent = `${sender}: ${msg.content}`;
+                chatMessages.appendChild(div);
+            });
+        }
     } catch (error) {
         console.error('Error loading messages:', error);
         alert('Error loading messages.');
@@ -81,7 +105,17 @@ async function loadMessages(receiverId) {
 
 async function sendMessage(content) {
     try {
-        await axios.post(`${BASE_URL}/message`, { content, receiverId: selectedUserId }, { headers: { Authorization: token } });
+       const response= await axios.post(`${BASE_URL}/message`, { content, receiverId: selectedUserId }, { headers: { Authorization: token } });
+        
+       const newMsg=response.data.data;
+
+       const localKey = `chat_${selectedUserId}`;
+        const messages = JSON.parse(localStorage.getItem(localKey)) || [];
+        const updated = [...messages, newMsg].slice(-10); // only last 10
+        localStorage.setItem(localKey, JSON.stringify(updated));
+
+        await loadMessages(selectedUserId);
+
     } catch (error) {
         console.error('Error sending message:', error);
         alert('Error sending message.');

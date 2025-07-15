@@ -22,12 +22,14 @@ exports.getMessages=async (req,res)=>{
   try {
     const receiverId=parseInt(req.params.receiverId);
     const senderId=req.user.userId;
+    const lastMessageId=parseInt(req.query.after) || 0;
     const messages=await Message.findAll({
     where:{
       [Op.or]:[
         { senderId, receiverId },
          { senderId: receiverId, receiverId: senderId }
-      ]
+      ],
+      id:{[Op.gt]:lastMessageId}
     },
     order: [['createdAt', 'ASC']]
     })
